@@ -1,15 +1,9 @@
 package com.fanniemae.cucumberrunner;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
-import com.fanniemae.base.TestBase;
-
-import cucumber.api.junit.Cucumber;
-
 import cucumber.api.CucumberOptions;
-import cucumber.api.java.Before;
+import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(

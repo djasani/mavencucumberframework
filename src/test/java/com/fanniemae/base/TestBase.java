@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -18,6 +20,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -34,7 +38,7 @@ public class TestBase {
 	public static String browser;
 	
 	
-	public void initiateBrowser(){
+	public void initiateBrowser() throws MalformedURLException{
 		if (driver == null) {
 
 			try {
@@ -97,11 +101,23 @@ public class TestBase {
 				log.debug("Chrome Launched !!!");
 			} else if (config.getProperty("browser").equals("ie")) {
 
-				System.setProperty("webdriver.ie.driver",
-						System.getProperty("user.dir") + File.separatorChar + "src" + File.separatorChar + "test" + File.separatorChar + "resources" 
-												+ File.separatorChar + "executables" + File.separatorChar + "IEDriverServer.exe");
-				driver =  (WebDriver) new InternetExplorerDriver();
-				log.debug("IE Launched !!!");
+				
+				//System.setProperty("webdriver.ie.driver",
+				///		System.getProperty("user.dir") + File.separatorChar + "src" + File.separatorChar + "test" + File.separatorChar + "resources" 
+					//							+ File.separatorChar + "executables" + File.separatorChar + "IEDriverServer.exe");
+				//driver =  (WebDriver) new InternetExplorerDriver();
+			
+				//log.debug("IE Launched !!!"); = 
+				
+				String USERNAME = "djasani";
+				String ACCESS_KEY = "afd42412-6910-49d7-a547-928de4984c09";
+				String URL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";
+				
+				DesiredCapabilities caps = DesiredCapabilities.safari();
+				caps.setCapability("platform", "OS X 10.11");
+				caps.setCapability("version", "10.0");
+				
+				driver = new RemoteWebDriver(new URL(URL), caps);
 			}
 
 			driver.get(config.getProperty("testsiteurl"));

@@ -1,5 +1,7 @@
 package com.fanniemae.step_definitions;
 
+import java.net.MalformedURLException;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
@@ -13,7 +15,7 @@ public class Hooks {
 	static TestBase tb;
 	
 	@Before
-	public static void setup(){
+	public static void setup() throws MalformedURLException{
 		tb = new TestBase();
 		tb.initiateBrowser();
 	}
