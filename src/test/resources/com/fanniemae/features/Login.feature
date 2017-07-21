@@ -5,9 +5,9 @@ Scenario Outline: User should able to login
 	When user clicks on Signin link
 	And user enters "<user>" as username or email address
 	And user enters "<password>" as password
-	And user click on signin button
+	And user click on submit button
 	Then user should see Welcome back message
 
 	Examples:
-	| user					| password				|
-	| djasani@gmail.com		| Test123			    |
+	| user							| password				|
+	| sdet702@sdettraining.com		| Password			    |
